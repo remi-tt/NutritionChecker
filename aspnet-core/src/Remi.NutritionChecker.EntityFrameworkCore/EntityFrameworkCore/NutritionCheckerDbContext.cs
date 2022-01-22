@@ -12,6 +12,7 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Remi.NutritionChecker.Points;
 
 namespace Remi.NutritionChecker.EntityFrameworkCore;
 
@@ -24,6 +25,9 @@ public class NutritionCheckerDbContext :
     ITenantManagementDbContext
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
+
+    public DbSet<DailyNutritionPoints> DailyNutritionPoints { get; set; }
+
 
     #region Entities from the modules
 
@@ -75,6 +79,13 @@ public class NutritionCheckerDbContext :
 
         /* Configure your own tables/entities inside here */
 
+         builder.Entity<DailyNutritionPoints>(b =>
+            {
+                b.ToTable(NutritionCheckerConsts.DbTablePrefix + "DailyNutritionPoints",
+                    NutritionCheckerConsts.DbSchema);
+                //b.ConfigureByConvention(); //auto configure for the base class props
+                b.Property(x => x.DailyPoints).IsRequired();
+            });
         //builder.Entity<YourEntity>(b =>
         //{
         //    b.ToTable(NutritionCheckerConsts.DbTablePrefix + "YourEntities", NutritionCheckerConsts.DbSchema);
