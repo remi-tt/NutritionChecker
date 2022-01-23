@@ -3,6 +3,7 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using Remi.NutritionChecker.Contract;
+using Remi.NutritionChecker.Points;
 
 namespace Remi.NutritionChecker.Contract.Points
 {
